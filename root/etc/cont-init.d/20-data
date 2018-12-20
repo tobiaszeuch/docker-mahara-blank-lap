@@ -1,0 +1,24 @@
+#!/bin/execlineb -P
+
+foreground {
+ if -t { s6-test ! -d /data }
+ if { s6-echo "[i] Create data folder" } 
+ if { s6-mkdir /data }
+}
+
+foreground {
+ if -t { s6-test ! -d /data/sessions }
+ if { s6-mkdir /data/sessions }
+ if { s6-envuidgid www-data s6-chown -U -- /data/sessions }
+}
+
+foreground {
+ if -t { s6-test ! -d /data/dwoo }
+ if { s6-mkdir /data/dwoo }
+ if { s6-envuidgid www-data s6-chown -U -- /data/dwoo }
+}
+
+if { s6-envuidgid www-data s6-chown -U -- /data }
+if { s6-chmod 4775 /data }
+
+exit 0

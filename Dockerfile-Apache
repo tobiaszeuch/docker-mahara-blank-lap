@@ -1,0 +1,27 @@
+FROM php:7.1-apache-stretch
+LABEL maintainer="Christian-Maximilian Steier"
+
+ARG VERSION=18.10
+ARG RELEASE=.0
+
+# Scripts
+ADD scripts /scripts
+
+# System
+RUN /scripts/prepare.sh && \
+    /scripts/system_services.sh && \
+    /scripts/utilities.sh && \
+    /scripts/php-extensions.sh && \
+    /scripts/composer.sh
+
+# Mahara
+RUN /scripts/mahara.sh && \
+    a2enmod rewrite headers expires
+
+# Copy local files
+COPY root/ /
+RUN rm -r /etc/services.d/php-fpm
+
+# Cleanup
+RUN /scripts/cleanup.sh
+ENTRYPOINT ["/init"]
