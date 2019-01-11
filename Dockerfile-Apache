@@ -19,7 +19,7 @@ RUN \
     echo "[i] Set wright permissions for /tmp and /var/tmp." && \
     chmod a=rwx,o+t /tmp /var/tmp && \
     echo "[i] Remove all suid files." && \
-    find $sysdirs -xdev -type f -a -perm +4000 -delete && \
+    find $sysdirs -xdev -type f -a -perm -4000 -delete && \
     echo "[i] Remove other programs that could be dangerous." && \
     find $sysdirs -xdev \( -name hexdump -o -name chgrp -o -name ln -o -name od -o -name strings -o -name su \) -delete && \
     echo "[i] Remove unnecessary user accounts." && \
