@@ -1,7 +1,7 @@
 FROM php:7.1-apache-stretch
 LABEL maintainer="Christian-Maximilian Steier"
 
-ARG VERSION=18.10
+ARG VERSION=19.04
 ARG RELEASE=.0
 ARG minimal_apt_get_install='apt-get install -y --no-install-recommends'
 ENV DEBIAN_FRONTEND=noninteractive \
