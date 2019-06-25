@@ -35,16 +35,7 @@ RUN \
     echo "\n[i] Install Composer\n" && \
     curl -sS https://getcomposer.org/installer | php && \
     chmod +x ./composer.phar && \
-    mv ./composer.phar /usr/local/bin/composer && \
-    \
-    # Mahara \
-    /scripts/mahara.sh && \
-    a2enmod rewrite headers expires && \
-    \
-    # Cleanup \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false less bzip2 vim-tiny psmisc curl git-core && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /etc/dpkg/dpkg.cfg.d/02apt-speedup /etc/ssh/ssh_host_* /var/cache/ldconfig/aux-cache /usr/share/doc /usr/share/man/ /usr/share/info/* /var/cache/man/* /tmp/* /etc/fstab /scripts
+    mv ./composer.phar /usr/local/bin/composer
 
 # Copy local files
 COPY root/ /
